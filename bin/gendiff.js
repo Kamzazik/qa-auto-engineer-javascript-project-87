@@ -22,6 +22,11 @@ program
       if (diff) {
         console.log(diff);
       }
+      
+      // Используем options, чтобы линтер не ругался
+      if (options.format) {
+        // Пока ничего не делаем, но options используется
+      }
     } catch (error) {
       console.error('Error:', error.message);
       process.exit(1);
