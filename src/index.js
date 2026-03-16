@@ -1,5 +1,6 @@
 // src/index.js
 import parseFile from './parsers.js';
+import buildDiff from './diff.js';
 
 /**
  * Главная функция, которая сравнивает два файла конфигурации
@@ -12,9 +13,6 @@ export default (filepath1, filepath2) => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
   
-  // Пока просто выводим данные для проверки
-  console.log('Data from file1:', data1);
-  console.log('Data from file2:', data2);
-  
-  return 'Difference will be here';
+  // Возвращаем результат сравнения
+  return buildDiff(data1, data2);
 };
