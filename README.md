@@ -5,3 +5,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Kamzazik_qa-auto-engineer-javascript-project-87)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Kamzazik_qa-auto-engineer-javascript-project-87)
+
+## Пример использования
+
+[![asciicast](https://asciinema.org/a/rgCLZGfbfQljwkx5.svg)](https://asciinema.org/a/rgCLZGfbfQljwkx5)
