@@ -6,6 +6,10 @@
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Kamzazik_qa-auto-engineer-javascript-project-87)
 
-## Пример использования
+## Примеры использования
 
+### Stylish формат (по умолчанию)
 [![asciicast](https://asciinema.org/a/rgCLZGfbfQljwkx5.svg)](https://asciinema.org/a/rgCLZGfbfQljwkx5)
+
+### Plain формат
+[![asciicast](https://asciinema.org/a/НОВАЯ_ССЫЛКА.svg)](https://asciinema.org/a/НОВАЯ_ССЫЛКА)
