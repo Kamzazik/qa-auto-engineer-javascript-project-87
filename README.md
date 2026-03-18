@@ -12,4 +12,7 @@
 [![asciicast](https://asciinema.org/a/rgCLZGfbfQljwkx5.svg)](https://asciinema.org/a/rgCLZGfbfQljwkx5)
 
 ### Plain формат
-[![asciicast](https://asciinema.org/a/НОВАЯ_ССЫЛКА.svg)](https://asciinema.org/a/НОВАЯ_ССЫЛКА)
+[![asciicast](https://asciinema.org/a/KjM9x4AvRKpMJ0wf.svg)](https://asciinema.org/a/KjM9x4AvRKpMJ0wf)
+
+### JSON формат
+[![asciicast](https://asciinema.org/a/fzo1KhsTpR5imcLC.svg)](https://asciinema.org/a/fzo1KhsTpR5imcLC)
