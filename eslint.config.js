@@ -5,7 +5,6 @@ export default [
   js.configs.recommended,
   {
     files: ["**/*.js"],
-    ignores: ["__tests__/**", "coverage/**", "node_modules/**"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -18,5 +17,12 @@ export default [
       "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
       "semi": ["error", "always"],
     },
+  },
+  {
+    ignores: [
+      "coverage/",
+      "node_modules/",
+      "__tests__/",
+    ],
   },
 ];
