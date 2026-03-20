@@ -1,26 +1,28 @@
-import js from "@eslint/js";
-import globals from "globals";
+import js from '@eslint/js';
+import globals from 'globals';
 
 export default [
+  js.configs.recommended,
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
-        ...globals.node,  // для process
-        ...globals.jest,  // для test, expect
+        ...globals.node,
+        ...globals.jest,
       },
     },
     rules: {
-      "no-unused-vars": ["error", { "argsIgnorePattern": "options" }],
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
+      'comma-dangle': ['error', 'always-multiline'],
+      'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
+      'no-trailing-spaces': 'error',
+      'eol-last': ['error', 'always'],
     },
   },
-  js.configs.recommended,
   {
-    ignores: [
-      "coverage/",
-      "node_modules/",
-    ],
+    ignores: ['coverage/', 'node_modules/'],
   },
 ];
