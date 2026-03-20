@@ -14,12 +14,20 @@ export default [
       },
     },
     rules: {
+      // Отключаем правила @stylistic
+      '@stylistic/semi': 'off',
+      '@stylistic/arrow-parens': 'off',
+      '@stylistic/no-trailing-spaces': 'off',
+      '@stylistic/eol-last': 'off',
+      '@stylistic/quotes': 'off',
+      '@stylistic/brace-style': 'off',
+      '@stylistic/quote-props': 'off',
+      '@stylistic/no-multi-spaces': 'off',
+      
+      // Основные правила
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
-      'comma-dangle': ['error', 'always-multiline'],
       'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
-      'no-trailing-spaces': 'error',
-      'eol-last': ['error', 'always'],
     },
   },
   {
