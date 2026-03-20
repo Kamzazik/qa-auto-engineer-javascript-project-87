@@ -8,10 +8,10 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-  "test": "npx jest",
-  "test:watch": "npx jest --watch",
-  "coverage": "npx jest --coverage"
-}
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "lint": "npx eslint .",
+    "coverage": "npx jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
-    "@eslint/js": "^10.0.1",
-    "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.0.3",
-    "globals": "^17.4.0",
+    "eslint": "^8.57.0",
     "jest": "^30.3.0"
   }
 }
