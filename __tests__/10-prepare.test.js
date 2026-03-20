@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import parseFile from '../src/parsers.js';
 
