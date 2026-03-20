@@ -8,10 +8,10 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest",
-    "test:watch": "npx jest --watch",
-    "lint": "npx eslint .",
-    "coverage": "npx jest --coverage"
+  "test": "npx jest",
+  "test:watch": "npx jest --watch",
+  "coverage": "npx jest --coverage"
+}
   },
   "repository": {
     "type": "git",
