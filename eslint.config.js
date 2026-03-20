@@ -14,17 +14,6 @@ export default [
       },
     },
     rules: {
-      // Отключаем @stylistic правила
-      "@stylistic/semi": "off",
-      "@stylistic/arrow-parens": "off",
-      "@stylistic/no-trailing-spaces": "off",
-      "@stylistic/eol-last": "off",
-      "@stylistic/quotes": "off",
-      "@stylistic/brace-style": "off",
-      "@stylistic/quote-props": "off",
-      "@stylistic/no-multi-spaces": "off",
-      
-      // Основные правила
       "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
       "semi": ["error", "always"],
     },
