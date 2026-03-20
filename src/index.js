@@ -1,18 +1,11 @@
 // src/index.js
 import parseFile from './parsers.js';
-import buildDiff from './diff.js';
+import getFormatter from './formatters/index.js';
 
-/**
- * Главная функция, которая сравнивает два файла конфигурации
- * @param {string} filepath1 - путь к первому файлу
- * @param {string} filepath2 - путь ко второму файлу
- * @returns {string} - строка с различиями
- */
-export default (filepath1, filepath2) => {
-  // Парсим оба файла
+export default (filepath1, filepath2, format = 'stylish') => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
   
-  // Возвращаем результат сравнения
-  return buildDiff(data1, data2);
+  const formatter = getFormatter(format);
+  return formatter(data1, data2);
 };
