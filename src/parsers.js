@@ -1,4 +1,3 @@
-
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -14,15 +13,13 @@ const parseFile = (filepath) => {
   const fileContent = readFile(filepath);
   const extension = getFileExtension(filepath);
 
-  switch (extension) {
-    case '.json':
-      return JSON.parse(fileContent);
-    case '.yml':
-    case '.yaml':
-      return yaml.load(fileContent);
-    default:
-      throw new Error(`Unsupported file format: ${extension}`);
+  if (extension === '.json') {
+    return JSON.parse(fileContent);
   }
+  if (extension === '.yml' || extension === '.yaml') {
+    return yaml.load(fileContent);
+  }
+  throw new Error(`Unsupported file format: ${extension}`);
 };
 
 export default parseFile;

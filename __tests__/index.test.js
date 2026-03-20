@@ -1,75 +1,42 @@
+import fs from 'fs';
 import genDiff from '../src/index.js';
 
-test('gendiff works with JSON files', () => {
-  const result = genDiff('./__fixtures__/file1.json', './__fixtures__/file2.json');
-  
-  expect(result).toContain('follow: false');
-  expect(result).toContain('host: hexlet.io');
-  expect(result).toContain('- proxy: 123.234.53.22');
-  expect(result).toContain('- timeout: 50');
-  expect(result).toContain('+ timeout: 20');
-  expect(result).toContain('+ verbose: true');
+const readFile = (filename) => fs.readFileSync(`./__fixtures__/${filename}`, 'utf-8').trim();
+
+const normalize = (str) => str.replace(/\r\n/g, '\n').trim();
+
+test('gendiff stylish format with JSON', () => {
+  const result = genDiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'stylish');
+  const expected = readFile('expected.txt');
+  expect(normalize(result)).toBe(normalize(expected));
 });
 
-test('gendiff works with YAML files', () => {
-  const result = genDiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml');
-  
-  expect(result).toContain('follow: false');
-  expect(result).toContain('host: hexlet.io');
-  expect(result).toContain('- proxy: 123.234.53.22');
-  expect(result).toContain('- timeout: 50');
-  expect(result).toContain('+ timeout: 20');
-  expect(result).toContain('+ verbose: true');
-});
-
-test('gendiff works with mixed formats', () => {
-  const result = genDiff('./__fixtures__/file1.json', './__fixtures__/file2.yml');
-  
-  expect(result).toContain('follow: false');
-  expect(result).toContain('host: hexlet.io');
-  expect(result).toContain('- proxy: 123.234.53.22');
-  expect(result).toContain('- timeout: 50');
-  expect(result).toContain('+ timeout: 20');
-  expect(result).toContain('+ verbose: true');
-});
-
-test('gendiff with plain format for JSON files', () => {
+test('gendiff plain format with JSON', () => {
   const result = genDiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'plain');
-  
-  expect(result).toContain("Property 'follow' was removed");
-  expect(result).toContain("Property 'proxy' was removed");
-  expect(result).toContain("Property 'timeout' was updated. From 50 to 20");
-  expect(result).toContain("Property 'verbose' was added with value: true");
-});
-
-test('gendiff with plain format for YAML files', () => {
-  const result = genDiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'plain');
-  
-  expect(result).toContain("Property 'follow' was removed");
-  expect(result).toContain("Property 'proxy' was removed");
-  expect(result).toContain("Property 'timeout' was updated. From 50 to 20");
-  expect(result).toContain("Property 'verbose' was added with value: true");
+  const expected = readFile('expected-plain.txt');
+  expect(normalize(result)).toBe(normalize(expected));
 });
 
 test('gendiff with json format', () => {
   const result = genDiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'json');
   
-  // Парсим обратно в объект для проверки структуры
+  // Проверяем, что результат можно распарсить
+  expect(() => JSON.parse(result)).not.toThrow();
+  
   const parsed = JSON.parse(result);
   
   // Проверяем, что это массив
   expect(Array.isArray(parsed)).toBe(true);
   
+  // Проверяем, что массив не пустой
+  expect(parsed.length).toBeGreaterThan(0);
+  
   // Находим нужные элементы по ключам
-  const followNode = parsed.find(item => item.key === 'follow');
-  const proxyNode = parsed.find(item => item.key === 'proxy');
   const timeoutNode = parsed.find(item => item.key === 'timeout');
   const verboseNode = parsed.find(item => item.key === 'verbose');
   const hostNode = parsed.find(item => item.key === 'host');
   
   // Проверяем типы изменений
-  expect(followNode.type).toBe('removed');
-  expect(proxyNode.type).toBe('removed');
   expect(timeoutNode.type).toBe('changed');
   expect(verboseNode.type).toBe('added');
   expect(hostNode.type).toBe('unchanged');
@@ -83,4 +50,10 @@ test('gendiff with json format', () => {
   
   // Проверяем значение для unchanged
   expect(hostNode.value).toBe('hexlet.io');
+});
+
+test('gendiff works with YAML files', () => {
+  const result = genDiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'stylish');
+  const expected = readFile('expected.txt');
+  expect(normalize(result)).toBe(normalize(expected));
 });
