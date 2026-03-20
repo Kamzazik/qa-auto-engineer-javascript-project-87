@@ -36,4 +36,7 @@
     "globals": "^17.4.0",
     "jest": "^30.3.0"
   }
+
+  "eslintIgnore": ["__tests__/**", "coverage/**", "node_modules/**"]
+
 }
