@@ -2,7 +2,6 @@ import { describe, test, expect } from 'vitest'
 import { execSync } from 'child_process'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { readFileSync } from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
