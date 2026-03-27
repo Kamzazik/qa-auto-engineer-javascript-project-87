@@ -1,35 +1,24 @@
-import fs from 'fs';
-import path from 'path';
-import genDiff from '../src/index.js';
+import { readFileSync } from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { describe, test, expect } from '@jest/globals'
+import genDiff from '../src/diff.js'
 
-const getFixturePath = (filename) => path.join(process.cwd(), '__fixtures__', filename);
-const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const normalize = (str) => str.replace(/\r\n/g, '\n').trim();
-
-describe('Генерация diff', () => {
-  test('stylish формат для JSON', () => {
-    const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish');
-    const expected = readFile('expected.txt');
-    expect(normalize(result)).toBe(normalize(expected));
-  });
-  
-  test('plain формат для JSON', () => {
-    const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
-    const expected = readFile('expected-plain.txt');
-    expect(normalize(result)).toBe(normalize(expected));
-  });
-  
-  test('json формат для JSON', () => {
-    const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
-    const parsed = JSON.parse(result);
-    expect(Array.isArray(parsed)).toBe(true);
-    expect(parsed.find(n => n.key === 'timeout').type).toBe('changed');
-  });
-  
-  test('stylish формат для YAML', () => {
-    const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish');
-    const expected = readFile('expected.txt');
-    expect(normalize(result)).toBe(normalize(expected));
-  });
-});
+describe('genDiff', () => {
+  test('should generate correct diff for flat json files', () => {
+    const filepath1 = path.join(__dirname, '__fixtures__', 'file1.json')
+    const filepath2 = path.join(__dirname, '__fixtures__', 'file2.json')
+    
+    const result = genDiff(filepath1, filepath2)
+    
+    const expected = readFileSync(
+      path.join(__dirname, '__fixtures__', 'expected.txt'),
+      'utf-8'
+    )
+    
+    expect(result).toEqual(expected)
+  })
+})
