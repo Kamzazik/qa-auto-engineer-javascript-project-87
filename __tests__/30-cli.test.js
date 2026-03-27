@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals'
+import { describe, test, expect } from 'vitest'
 import { execSync } from 'child_process'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -7,14 +7,18 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 describe('CLI', () => {
-  test('gendiff cli с опцией --format plain', () => {
+  const execApp = (filepath1, filepath2, format = 'stylish') => {
+    return execSync(
+      `node bin/gendiff.js ${format === 'stylish' ? '' : `--format ${format}`} ${filepath1} ${filepath2}`,
+      { encoding: 'utf-8' }
+    )
+  }
+
+  test('gendiff cli with plain format', () => {
     const filepath1 = path.join(__dirname, '__fixtures__', 'file1.json')
     const filepath2 = path.join(__dirname, '__fixtures__', 'file2.json')
     
-    const result = execSync(
-      `node bin/gendiff.js --format plain ${filepath1} ${filepath2}`,
-      { encoding: 'utf-8' }
-    )
+    const result = execApp(filepath1, filepath2, 'plain')
     
     expect(result).toContain("Property 'follow' was removed")
     expect(result).toContain("Property 'proxy' was removed")
@@ -22,14 +26,11 @@ describe('CLI', () => {
     expect(result).toContain("Property 'verbose' was added with value: true")
   })
   
-  test('gendiff cli без опции (default stylish)', () => {
+  test('gendiff cli default stylish format', () => {
     const filepath1 = path.join(__dirname, '__fixtures__', 'file1.json')
     const filepath2 = path.join(__dirname, '__fixtures__', 'file2.json')
     
-    const result = execSync(
-      `node bin/gendiff.js ${filepath1} ${filepath2}`,
-      { encoding: 'utf-8' }
-    )
+    const result = execApp(filepath1, filepath2)
     
     expect(result).toContain('- follow: false')
     expect(result).toContain('+ timeout: 20')
