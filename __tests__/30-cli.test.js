@@ -46,4 +46,15 @@ describe('CLI', () => {
     expect(result).toContain('- follow: false')
     expect(result).toContain('+ timeout: 20')
   })
+
+  test('gendiff cli with json format', () => {
+    const filepath1 = path.join(__dirname, '__fixtures__', 'file1.json')
+    const filepath2 = path.join(__dirname, '__fixtures__', 'file2.json')
+    
+    const result = execApp(filepath1, filepath2, 'json')
+    
+    expect(() => JSON.parse(result)).not.toThrow()
+    const parsed = JSON.parse(result)
+    expect(Array.isArray(parsed)).toBe(true)
+  })
 })
