@@ -6,13 +6,13 @@
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Kamzazik_qa-auto-engineer-javascript-project-87)
 
-## Примеры использования
+## Примеры работы
 
 ### Stylish формат (по умолчанию)
-[![asciicast](https://asciinema.org/a/rgCLZGfbfQljwkx5.svg)](https://asciinema.org/a/rgCLZGfbfQljwkx5)
+[![asciicast](https://asciinema.org/a/3Bmp2SBMYryO6UDG.svg)](https://asciinema.org/a/3Bmp2SBMYryO6UDG)
 
 ### Plain формат
-[![asciicast](https://asciinema.org/a/KjM9x4AvRKpMJ0wf.svg)](https://asciinema.org/a/KjM9x4AvRKpMJ0wf)
+[![asciicast](https://asciinema.org/a/KhXaOSSHMyu3D1gA.svg)](https://asciinema.org/a/KhXaOSSHMyu3D1gA)
 
 ### JSON формат
-[![asciicast](https://asciinema.org/a/fzo1KhsTpR5imcLC.svg)](https://asciinema.org/a/fzo1KhsTpR5imcLC)
+[![asciicast](https://asciinema.org/a/Ve62OSmdjUTMmcUS.svg)](https://asciinema.org/a/Ve62OSmdjUTMmcUS)
