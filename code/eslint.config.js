@@ -1,16 +1,27 @@
 import js from '@eslint/js'
 import globals from 'globals'
-import { defineConfig } from 'eslint/config'
-import stylistic from '@stylistic/eslint-plugin'
-import pluginJest from 'eslint-plugin-jest'
 
-export default defineConfig([
-  stylistic.configs.recommended,
-  { files: ['**/*.{js,mjs,cjs}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: globals.node } },
+export default [
+  js.configs.recommended,
   {
+    files: ['**/*.js'],
     languageOptions: {
-      globals: pluginJest.environments.globals.globals,
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
+    },
+    rules: {
+      'semi': ['error', 'never'],
+      'no-trailing-spaces': 'error',
+      'eol-last': ['error', 'always'],
+      'arrow-parens': ['error', 'as-needed'],
+      'comma-dangle': ['error', 'always-multiline'],
+      'brace-style': ['error', '1tbs'],
+      'quotes': ['error', 'single'],
+      'indent': ['error', 2],
     },
   },
-])
+]
