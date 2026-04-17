@@ -3,7 +3,7 @@ import parseFile from './parsers.js'
 function buildDiff(data1, data2) {
   const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort()
 
-  return keys.map(key => {
+  return keys.map((key) => {
     if (!Object.hasOwn(data1, key)) {
       return {
         key,
@@ -38,16 +38,16 @@ function buildDiff(data1, data2) {
 }
 
 function formatStylish(diffTree) {
-  const lines = diffTree.map(node => {
+  const lines = diffTree.map((node) => {
     switch (node.type) {
-    case 'added':
-      return `  + ${node.key}: ${node.value}`
-    case 'removed':
-      return `  - ${node.key}: ${node.value}`
-    case 'changed':
-      return `  - ${node.key}: ${node.oldValue}\n  + ${node.key}: ${node.newValue}`
-    case 'unchanged':
-      return `    ${node.key}: ${node.value}`
+      case 'added':
+        return `  + ${node.key}: ${node.value}`
+      case 'removed':
+        return `  - ${node.key}: ${node.value}`
+      case 'changed':
+        return `  - ${node.key}: ${node.oldValue}\n  + ${node.key}: ${node.newValue}`
+      case 'unchanged':
+        return `    ${node.key}: ${node.value}`
     }
   }).flat()
 
@@ -55,18 +55,18 @@ function formatStylish(diffTree) {
 }
 
 function formatPlain(diffTree, parentKey = '') {
-  const lines = diffTree.map(node => {
+  const lines = diffTree.map((node) => {
     const property = parentKey ? `${parentKey}.${node.key}` : node.key
 
     switch (node.type) {
-    case 'added':
-      return `Property '${property}' was added with value: ${formatValue(node.value)}`
-    case 'removed':
-      return `Property '${property}' was removed`
-    case 'changed':
-      return `Property '${property}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
-    case 'unchanged':
-      return null
+      case 'added':
+        return `Property '${property}' was added with value: ${formatValue(node.value)}`
+      case 'removed':
+        return `Property '${property}' was removed`
+      case 'changed':
+        return `Property '${property}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
+      case 'unchanged':
+        return null
     }
   }).filter(line => line !== null)
 
