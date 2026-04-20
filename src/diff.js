@@ -1,41 +1,7 @@
-import parseFile from './parsers.js'
-
-function buildDiff(data1, data2) {
-  const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort()
-
-  return keys.map((key) => {
-    if (!Object.hasOwn(data1, key)) {
-      return {
-        key,
-        type: 'added',
-        value: data2[key],
-      }
-    }
-
-    if (!Object.hasOwn(data2, key)) {
-      return {
-        key,
-        type: 'removed',
-        value: data1[key],
-      }
-    }
-
-    if (data1[key] !== data2[key]) {
-      return {
-        key,
-        type: 'changed',
-        oldValue: data1[key],
-        newValue: data2[key],
-      }
-    }
-
-    return {
-      key,
-      type: 'unchanged',
-      value: data1[key],
-    }
-  })
-}
+import fs from 'fs'
+import path from 'path'
+import parse from './parsers.js'
+import buildTree from './buildTree.js'
 
 function formatStylish(diffTree) {
   const lines = diffTree.map((node) => {
@@ -88,10 +54,16 @@ function formatJson(diffTree) {
 }
 
 export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
-  const data1 = parseFile(filepath1)
-  const data2 = parseFile(filepath2)
+  const data1Raw = fs.readFileSync(filepath1, 'utf-8')
+  const data2Raw = fs.readFileSync(filepath2, 'utf-8')
+  
+  const ext1 = path.extname(filepath1).toLowerCase().slice(1)
+  const ext2 = path.extname(filepath2).toLowerCase().slice(1)
+  
+  const data1 = parse(data1Raw, ext1)
+  const data2 = parse(data2Raw, ext2)
 
-  const diffTree = buildDiff(data1, data2)
+  const diffTree = buildTree(data1, data2)
 
   if (formatName === 'plain') {
     return formatPlain(diffTree)
