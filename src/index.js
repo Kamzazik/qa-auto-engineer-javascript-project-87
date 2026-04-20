@@ -1,9 +1,6 @@
 import { Command } from 'commander'
 import genDiff from './diff.js'
 
-// Реэкспорт genDiff как default для тестов
-export { default } from './diff.js'
-
 export function run() {
   const program = new Command()
 
