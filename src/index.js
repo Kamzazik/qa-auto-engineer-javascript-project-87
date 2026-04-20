@@ -1,7 +1,7 @@
 import { Command } from 'commander'
 import genDiff from './diff.js'
 
-export function run() {
+export default function run() {
   const program = new Command()
 
   program
