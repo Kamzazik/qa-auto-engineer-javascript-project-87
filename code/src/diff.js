@@ -1,4 +1,6 @@
-import parseFile from './parsers.js'
+import fs from 'fs'
+import path from 'path'
+import parse from './parsers.js'
 
 function buildDiff(data1, data2) {
   const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort()
@@ -88,8 +90,14 @@ function formatJson(diffTree) {
 }
 
 export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
-  const data1 = parseFile(filepath1)
-  const data2 = parseFile(filepath2)
+  const data1Raw = fs.readFileSync(filepath1, 'utf-8')
+  const data2Raw = fs.readFileSync(filepath2, 'utf-8')
+  
+  const ext1 = path.extname(filepath1).toLowerCase().slice(1)
+  const ext2 = path.extname(filepath2).toLowerCase().slice(1)
+  
+  const data1 = parse(data1Raw, ext1)
+  const data2 = parse(data2Raw, ext2)
 
   const diffTree = buildDiff(data1, data2)
 
