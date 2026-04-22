@@ -1,20 +1,21 @@
-import { Command } from 'commander'
-import genDiff from './diff.js'
+import fs from 'fs'
+import path from 'path'
+import parse from './parsers.js'
+import buildTree from './buildTree.js'
+import getFormatter from './formatters/index.js'
 
-export default function run() {
-  const program = new Command()
+export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
+  const data1Raw = fs.readFileSync(filepath1, 'utf-8')
+  const data2Raw = fs.readFileSync(filepath2, 'utf-8')
 
-  program
-    .name('gendiff')
-    .description('Compares two configuration files and shows a difference.')
-    .version('1.0.0')
-    .option('-f, --format <type>', 'output format', 'stylish')
-    .argument('<filepath1>', 'path to first file')
-    .argument('<filepath2>', 'path to second file')
-    .action((filepath1, filepath2, options) => {
-      const result = genDiff(filepath1, filepath2, options.format)
-      console.log(result)
-    })
+  const ext1 = path.extname(filepath1).toLowerCase().slice(1)
+  const ext2 = path.extname(filepath2).toLowerCase().slice(1)
 
-  program.parse()
+  const data1 = parse(data1Raw, ext1)
+  const data2 = parse(data2Raw, ext2)
+
+  const diffTree = buildTree(data1, data2)
+
+  const formatter = getFormatter(formatName)
+  return formatter(diffTree)
 }
