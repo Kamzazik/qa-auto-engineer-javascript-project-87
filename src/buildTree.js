@@ -1,4 +1,4 @@
-function buildTree(data1, data2) {
+export default (data1, data2) => {
   const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort()
 
   return keys.map((key) => {
@@ -34,5 +34,3 @@ function buildTree(data1, data2) {
     }
   })
 }
-
-export default buildTree

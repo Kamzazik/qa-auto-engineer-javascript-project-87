@@ -1,4 +1,4 @@
-export default function formatStylish(diffTree) {
+export default (diffTree) => {
   const lines = diffTree.map((node) => {
     switch (node.type) {
       case 'added':

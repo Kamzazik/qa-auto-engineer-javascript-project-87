@@ -6,7 +6,7 @@ const parsers = {
   yml: data => yaml.load(data),
 }
 
-export default function parse(data, format) {
+export default (data, format) => {
   if (!parsers[format]) {
     throw new Error(`Unsupported format: ${format}`)
   }

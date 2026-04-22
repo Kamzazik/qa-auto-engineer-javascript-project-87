@@ -1,4 +1,4 @@
-function formatValue(value) {
+const formatValue = (value) => {
   if (typeof value === 'object' && value !== null) {
     return '[complex value]'
   }
@@ -8,7 +8,7 @@ function formatValue(value) {
   return value
 }
 
-export default function formatPlain(diffTree, parentKey = '') {
+export default (diffTree, parentKey = '') => {
   const lines = diffTree.map((node) => {
     const property = parentKey ? `${parentKey}.${node.key}` : node.key
 

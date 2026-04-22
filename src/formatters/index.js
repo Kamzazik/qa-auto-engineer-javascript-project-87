@@ -8,9 +8,10 @@ const formatters = {
   json: formatJson,
 }
 
-export default function getFormatter(formatName) {
-  if (!formatters[formatName]) {
-    throw new Error(`Unsupported format: ${formatName}`)
+export default function format(diffTree, formatName = 'stylish') {
+  const formatType = formatName
+  if (!formatters[formatType]) {
+    throw new Error(`Unsupported format: ${formatType}`)
   }
-  return formatters[formatName]
+  return formatters[formatType](diffTree)
 }
