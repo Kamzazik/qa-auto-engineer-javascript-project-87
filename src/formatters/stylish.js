@@ -1,6 +1,6 @@
 const INDENT_SIZE = 4
 
-const getIndent = (type, depth = 0) => {
+const getIndent = (type) => {
   if (type === 'unchanged') {
     return ' '.repeat(INDENT_SIZE)
   }
