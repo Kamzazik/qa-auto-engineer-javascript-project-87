@@ -9,82 +9,43 @@ const __dirname = path.dirname(__filename)
 
 const fixturesDir = path.join(__dirname, '..', '__fixtures__')
 
+// Читаем фикстуры заранее
+const expectedStylish = fs.readFileSync(path.join(fixturesDir, 'expected-stylish.txt'), 'utf-8').trim()
+const expectedPlain = fs.readFileSync(path.join(fixturesDir, 'expected-plain.txt'), 'utf-8').trim()
+const expectedJson = JSON.parse(fs.readFileSync(path.join(fixturesDir, 'expected-json.json'), 'utf-8'))
+
+const testCases = [
+  { name: 'json', file1: 'file1.json', file2: 'file2.json' },
+  { name: 'yml', file1: 'file1.yml', file2: 'file2.yml' },
+  { name: 'yaml', file1: 'file1.yaml', file2: 'file2.yaml' },
+]
+
 describe('gendiff', () => {
-  // JSON tests
-  test('json files with stylish format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.json')
-    const filepath2 = path.join(fixturesDir, 'file2.json')
-    const result = genDiff(filepath1, filepath2, 'stylish')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-stylish.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
+  testCases.forEach(({ name, file1, file2 }) => {
+    const filepath1 = path.join(fixturesDir, file1)
+    const filepath2 = path.join(fixturesDir, file2)
 
-  test('json files with plain format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.json')
-    const filepath2 = path.join(fixturesDir, 'file2.json')
-    const result = genDiff(filepath1, filepath2, 'plain')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-plain.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
+    describe(`Входной формат: ${name}`, () => {
+      test('вывод по умолчанию (без опций)', () => {
+        const result = genDiff(filepath1, filepath2)
+        expect(result).toEqual(expectedStylish)
+      })
 
-  test('json files with json format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.json')
-    const filepath2 = path.join(fixturesDir, 'file2.json')
-    const result = genDiff(filepath1, filepath2, 'json')
-    expect(() => JSON.parse(result)).not.toThrow()
-    const parsed = JSON.parse(result)
-    expect(Array.isArray(parsed)).toBe(true)
-  })
+      test('формат stylish', () => {
+        const result = genDiff(filepath1, filepath2, 'stylish')
+        expect(result).toEqual(expectedStylish)
+      })
 
-  // YML tests
-  test('yml files with stylish format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yml')
-    const filepath2 = path.join(fixturesDir, 'file2.yml')
-    const result = genDiff(filepath1, filepath2, 'stylish')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-stylish.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
+      test('формат plain', () => {
+        const result = genDiff(filepath1, filepath2, 'plain')
+        expect(result).toEqual(expectedPlain)
+      })
 
-  test('yml files with plain format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yml')
-    const filepath2 = path.join(fixturesDir, 'file2.yml')
-    const result = genDiff(filepath1, filepath2, 'plain')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-plain.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
-
-  test('yml files with json format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yml')
-    const filepath2 = path.join(fixturesDir, 'file2.yml')
-    const result = genDiff(filepath1, filepath2, 'json')
-    expect(() => JSON.parse(result)).not.toThrow()
-    const parsed = JSON.parse(result)
-    expect(Array.isArray(parsed)).toBe(true)
-  })
-
-  // YAML tests
-  test('yaml files with stylish format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yaml')
-    const filepath2 = path.join(fixturesDir, 'file2.yaml')
-    const result = genDiff(filepath1, filepath2, 'stylish')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-stylish.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
-
-  test('yaml files with plain format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yaml')
-    const filepath2 = path.join(fixturesDir, 'file2.yaml')
-    const result = genDiff(filepath1, filepath2, 'plain')
-    const expected = fs.readFileSync(path.join(fixturesDir, 'expected-plain.txt'), 'utf-8')
-    expect(result).toEqual(expected.trim())
-  })
-
-  test('yaml files with json format', () => {
-    const filepath1 = path.join(fixturesDir, 'file1.yaml')
-    const filepath2 = path.join(fixturesDir, 'file2.yaml')
-    const result = genDiff(filepath1, filepath2, 'json')
-    expect(() => JSON.parse(result)).not.toThrow()
-    const parsed = JSON.parse(result)
-    expect(Array.isArray(parsed)).toBe(true)
+      test('формат json', () => {
+        const result = genDiff(filepath1, filepath2, 'json')
+        const parsed = JSON.parse(result)
+        expect(parsed).toEqual(expectedJson)
+      })
+    })
   })
 })

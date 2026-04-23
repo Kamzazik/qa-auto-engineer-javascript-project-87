@@ -1,36 +1,36 @@
-export default (data1, data2) => {
-  const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort()
+export default (oldData, newData) => {
+  const keys = [...new Set([...Object.keys(oldData), ...Object.keys(newData)])].sort()
 
   return keys.map((key) => {
-    if (!Object.hasOwn(data1, key)) {
+    if (!Object.hasOwn(oldData, key)) {
       return {
         key,
         type: 'added',
-        value: data2[key],
+        value: newData[key],
       }
     }
 
-    if (!Object.hasOwn(data2, key)) {
+    if (!Object.hasOwn(newData, key)) {
       return {
         key,
         type: 'removed',
-        value: data1[key],
+        value: oldData[key],
       }
     }
 
-    if (data1[key] !== data2[key]) {
+    if (oldData[key] !== newData[key]) {
       return {
         key,
         type: 'changed',
-        oldValue: data1[key],
-        newValue: data2[key],
+        oldValue: oldData[key],
+        newValue: newData[key],
       }
     }
 
     return {
       key,
       type: 'unchanged',
-      value: data1[key],
+      value: oldData[key],
     }
   })
 }

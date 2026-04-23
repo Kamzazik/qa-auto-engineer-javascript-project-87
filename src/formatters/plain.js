@@ -8,9 +8,13 @@ const formatValue = (value) => {
   return value
 }
 
+const getPropertyPath = (parentKey, currentKey) => {
+  return parentKey ? `${parentKey}.${currentKey}` : currentKey
+}
+
 export default (diffTree, parentKey = '') => {
   const lines = diffTree.map((node) => {
-    const property = parentKey ? `${parentKey}.${node.key}` : node.key
+    const property = getPropertyPath(parentKey, node.key)
 
     switch (node.type) {
       case 'added':

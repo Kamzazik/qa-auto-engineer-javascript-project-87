@@ -1,14 +1,25 @@
+const INDENT_SIZE = 4
+
+const getIndent = (type, depth = 0) => {
+  if (type === 'unchanged') {
+    return ' '.repeat(INDENT_SIZE)
+  }
+  return ' '.repeat(INDENT_SIZE - 2)
+}
+
 export default (diffTree) => {
   const lines = diffTree.map((node) => {
+    const indent = getIndent(node.type)
+
     switch (node.type) {
       case 'added':
-        return `  + ${node.key}: ${node.value}`
+        return `${indent}+ ${node.key}: ${node.value}`
       case 'removed':
-        return `  - ${node.key}: ${node.value}`
+        return `${indent}- ${node.key}: ${node.value}`
       case 'changed':
-        return `  - ${node.key}: ${node.oldValue}\n  + ${node.key}: ${node.newValue}`
+        return `${indent}- ${node.key}: ${node.oldValue}\n${indent}+ ${node.key}: ${node.newValue}`
       case 'unchanged':
-        return `    ${node.key}: ${node.value}`
+        return `${indent}${node.key}: ${node.value}`
     }
   }).flat()
 
