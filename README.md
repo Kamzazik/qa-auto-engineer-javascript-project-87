@@ -1,7 +1,8 @@
 ## Вычислитель отличий
 
 [![Actions Status](https://github.com/Kamzazik/qa-auto-engineer-javascript-project-87/workflows/hexlet-check/badge.svg)](https://github.com/Kamzazik/qa-auto-engineer-javascript-project-87/actions)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Kamzazik_qa-auto-engineer-javascript-project-87)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=alert_status)](https://sonarcloud.io/dashboard?id=Kamzazik_qa-auto-engineer-javascript-project-87)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Kamzazik_qa-auto-engineer-javascript-project-87&metric=coverage)](https://sonarcloud.io/dashboard?id=Kamzazik_qa-auto-engineer-javascript-project-87)
 
 **Вычислитель отличий** — это утилита командной строки для сравнения двух конфигурационных файлов (JSON, YAML). Программа показывает различия между файлами в наглядном формате.
 
