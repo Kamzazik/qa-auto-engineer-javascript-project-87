@@ -38,10 +38,10 @@ gendiff --format plain file1.json file2.json
 ## Примеры работы
 
 ### Stylish формат (по умолчанию)
-[![asciicast](https://asciinema.org/a/3Bmp2SBMYryO6UDG.svg)](https://asciinema.org/a/3Bmp2SBMYryO6UDG)
+[![asciicast](https://asciinema.org/a/zRPo9iPRAdL9GOMB.svg)](https://asciinema.org/a/zRPo9iPRAdL9GOMB)
 
 ### Plain формат
-[![asciicast](https://asciinema.org/a/KhXaOSSHMyu3D1gA.svg)](https://asciinema.org/a/KhXaOSSHMyu3D1gA)
+[![asciicast](https://asciinema.org/a/mFIUZn5kSiStGqI7.svg)](https://asciinema.org/a/mFIUZn5kSiStGqI7)
 
 ### JSON формат
-[![asciicast](https://asciinema.org/a/Ve62OSmdjUTMmcUS.svg)](https://asciinema.org/a/Ve62OSmdjUTMmcUS)
+[![asciicast](https://asciinema.org/a/MsFQdrebhJcb6dgj.svg)](https://asciinema.org/a/MsFQdrebhJcb6dgj)
