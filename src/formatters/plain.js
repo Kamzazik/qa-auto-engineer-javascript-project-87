@@ -22,7 +22,7 @@ export default (diffTree, parentKey = '') => {
       case 'removed':
         return `Property '${property}' was removed`
       case 'changed':
-        return `Property '${property}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
+        return `Property '${property}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`
       case 'unchanged':
         return null
     }

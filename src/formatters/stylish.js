@@ -17,7 +17,7 @@ export default (diffTree) => {
       case 'removed':
         return `${indent}- ${node.key}: ${node.value}`
       case 'changed':
-        return `${indent}- ${node.key}: ${node.oldValue}\n${indent}+ ${node.key}: ${node.newValue}`
+        return `${indent}- ${node.key}: ${node.value1}\n${indent}+ ${node.key}: ${node.value2}`
       case 'unchanged':
         return `${indent}${node.key}: ${node.value}`
     }
