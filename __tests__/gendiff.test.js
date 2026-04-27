@@ -9,10 +9,8 @@ const __dirname = path.dirname(__filename)
 
 const fixturesDir = path.join(__dirname, '..', '__fixtures__')
 
-// Читаем фикстуры заранее
 const expectedStylish = fs.readFileSync(path.join(fixturesDir, 'expected-stylish.txt'), 'utf-8').trim()
 const expectedPlain = fs.readFileSync(path.join(fixturesDir, 'expected-plain.txt'), 'utf-8').trim()
-const expectedJson = JSON.parse(fs.readFileSync(path.join(fixturesDir, 'expected-json.json'), 'utf-8'))
 
 const testCases = [
   { name: 'json', file1: 'file1.json', file2: 'file2.json' },
@@ -43,8 +41,8 @@ describe('gendiff', () => {
 
       test('формат json', () => {
         const result = genDiff(filepath1, filepath2, 'json')
-        const parsed = JSON.parse(result)
-        expect(parsed).toEqual(expectedJson)
+        const expected = fs.readFileSync(path.join(fixturesDir, 'expected-json.txt'), 'utf-8')
+        expect(result.trim()).toEqual(expected.trim())
       })
     })
   })
